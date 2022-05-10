@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "@vueuse/core": "^8.3.1",
+    "@vueuse/rxjs": "^8.4.2",
     "axios": "^0.27.2",
+    "dexie": "^3.2.2",
     "element-plus": "^2.1.11",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
+    "rxjs": "^7.5.5",
     "vue": "^3.2.33",
     "vue-i18n": "^9.1.10",
     "vue-router": "^4.0.14"
@@ -27,6 +30,7 @@
     "@types/nprogress": "^0.2.0",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
+    "@unocss/preset-web-fonts": "^0.33.2",
     "@unocss/reset": "^0.32.9",
     "@vitejs/plugin-vue": "^2.3.1",
     "@vue/test-utils": "^2.0.0-rc.21",

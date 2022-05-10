@@ -8,11 +8,14 @@ specifiers:
   '@types/nprogress': ^0.2.0
   '@typescript-eslint/eslint-plugin': ^5.10.0
   '@typescript-eslint/parser': ^5.10.0
+  '@unocss/preset-web-fonts': ^0.33.2
   '@unocss/reset': ^0.32.9
   '@vitejs/plugin-vue': ^2.3.1
   '@vue/test-utils': ^2.0.0-rc.21
   '@vueuse/core': ^8.3.1
+  '@vueuse/rxjs': ^8.4.2
   axios: ^0.27.2
+  dexie: ^3.2.2
   element-plus: ^2.1.11
   eslint: ^8.7.0
   eslint-config-airbnb-base: ^15.0.0
@@ -25,6 +28,7 @@ specifiers:
   pinia: ^2.0.14
   pnpm: ^7.0.0
   prettier: ^2.5.1
+  rxjs: ^7.5.5
   sass: ^1.51.0
   typescript: ^4.6.4
   unocss: ^0.32.9
@@ -41,10 +45,13 @@ specifiers:
 
 dependencies:
   '@vueuse/core': 8.3.1_vue@3.2.33
+  '@vueuse/rxjs': 8.4.2_rxjs@7.5.5+vue@3.2.33
   axios: 0.27.2
+  dexie: 3.2.2
   element-plus: 2.1.11_vue@3.2.33
   nprogress: 0.2.0
   pinia: 2.0.14_typescript@4.6.4+vue@3.2.33
+  rxjs: 7.5.5
   vue: 3.2.33
   vue-i18n: 9.1.10_vue@3.2.33
   vue-router: 4.0.14_vue@3.2.33
@@ -57,6 +64,7 @@ devDependencies:
   '@types/nprogress': 0.2.0
   '@typescript-eslint/eslint-plugin': 5.21.0_ade6595cb7be1524e723c025c098ae5d
   '@typescript-eslint/parser': 5.21.0_eslint@8.14.0+typescript@4.6.4
+  '@unocss/preset-web-fonts': 0.33.2
   '@unocss/reset': 0.32.9
   '@vitejs/plugin-vue': 2.3.1_vite@2.9.7+vue@3.2.33
   '@vue/test-utils': 2.0.0-rc.21_vue@3.2.33
@@ -654,6 +662,10 @@ packages:
     resolution: {integrity: sha512-tnKMbe3hGFaMyVCiK5kw4rVEENNJ/XZHOy1SQ+WVobLv4K6zAxXdqeQ3DiNvzzHnEzAFX6ddp4zx975sTJ74ZQ==}
     dev: true
 
+  /@unocss/core/0.33.2:
+    resolution: {integrity: sha512-o6x1SyO9gUHMhXagUNekZ0Bj/GOg1a2QSorFBg1NoR36GHuX+Uz9UJqzHPx5QS7g2jbJdeR01zG9pwVw0R5Tlg==}
+    dev: true
+
   /@unocss/inspector/0.32.9:
     resolution: {integrity: sha512-dSjAWTkxkyOU48+mroF3hbxVm8SxNtx57HkT/j2nuZoX3F3tVVEi+5xHwiIKeDO4h0oR8zpbzWCK6NkhtdTEsw==}
     dependencies:
@@ -700,6 +712,13 @@ packages:
     resolution: {integrity: sha512-XruDgt/sD4DpJsN45qSBSdJ2NGfmItGqWbKtrErxDghbEYQdkIyZBrKn+4dzjs2qe4aOTtWzzRx5+fBlHFc5rg==}
     dependencies:
       '@unocss/core': 0.32.9
+      ohmyfetch: 0.4.16
+    dev: true
+
+  /@unocss/preset-web-fonts/0.33.2:
+    resolution: {integrity: sha512-PxMhZiM5WpqXpSSUlJ+46au+te/ZJ77dpyv3HJ0leiMxUx3UWkUKOlNWyBUPWO61EpxlXisLEmdhEU/xyZ318g==}
+    dependencies:
+      '@unocss/core': 0.33.2
       ohmyfetch: 0.4.16
     dev: true
 
@@ -911,8 +930,36 @@ packages:
     resolution: {integrity: sha512-1aZaFL44HzXXkfN6Q7KMDOXBFKTHDClHlOJBxtN8rTBXIIScoGOrJCpxWiQ4kuVg95MzG/pHrd3P4wd8poL9XQ==}
     dev: false
 
+  /@vueuse/rxjs/8.4.2_rxjs@7.5.5+vue@3.2.33:
+    resolution: {integrity: sha512-Up+6KTdh97IUMh0XEdJu2z6onZGexRO5/YPo0M4Ye7qUUe+T06NMhYF4+G3Qq3npf65e0t7zRgQFuIj7gctBSA==}
+    peerDependencies:
+      rxjs: '>=6.0.0'
+    dependencies:
+      '@vueuse/shared': 8.4.2_vue@3.2.33
+      rxjs: 7.5.5
+      vue-demi: 0.12.1_vue@3.2.33
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+    dev: false
+
   /@vueuse/shared/8.3.1_vue@3.2.33:
     resolution: {integrity: sha512-7HKLCcxp4dtONq6QSSoavblo9riYgqzw7jhqiC0/VUYMXKzqj1G/GznOzTmY8Wi8uKKT197JqjKQ1DKt2j/0+A==}
+    peerDependencies:
+      '@vue/composition-api': ^1.1.0
+      vue: ^2.6.0 || ^3.2.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+      vue:
+        optional: true
+    dependencies:
+      vue: 3.2.33
+      vue-demi: 0.12.1_vue@3.2.33
+    dev: false
+
+  /@vueuse/shared/8.4.2_vue@3.2.33:
+    resolution: {integrity: sha512-hILXMEjL8YQhj1LHN/HZ49UThyfk8irTjhele2nW+L3N55ElFUBGB/f4w0rg8EW+/suhqv7kJJPTZzvHCqxlIw==}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
       vue: ^2.6.0 || ^3.2.0
@@ -1401,6 +1448,11 @@ packages:
   /destr/1.1.1:
     resolution: {integrity: sha512-QqkneF8LrYmwATMdnuD2MLI3GHQIcBnG6qFC2q9bSH430VTCDAVjcspPmUaKhPGtAtPAftIUFqY1obQYQuwmbg==}
     dev: true
+
+  /dexie/3.2.2:
+    resolution: {integrity: sha512-q5dC3HPmir2DERlX+toCBbHQXW5MsyrFqPFcovkH9N2S/UW/H3H5AWAB6iEOExeraAu+j+zRDG+zg/D7YhH0qg==}
+    engines: {node: '>=6.0'}
+    dev: false
 
   /dir-glob/3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
@@ -3557,6 +3609,12 @@ packages:
       queue-microtask: 1.2.3
     dev: true
 
+  /rxjs/7.5.5:
+    resolution: {integrity: sha512-sy+H0pQofO95VDmFLzyaw9xNJU4KTRSwQIGM6+iG3SypAtCiLDzpeG8sJrNCWn2Up9km+KhkvTdbkrdy+yzZdw==}
+    dependencies:
+      tslib: 2.4.0
+    dev: false
+
   /safe-regex/2.1.1:
     resolution: {integrity: sha512-rx+x8AMzKb5Q5lQ95Zoi6ZbJqwCLkqi3XuJXp5P3rT8OEc6sZCJG5AE5dU3lsgRr/F4Bs31jSlVN+j5KrsGu9A==}
     dependencies:
@@ -3806,6 +3864,10 @@ packages:
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
+
+  /tslib/2.4.0:
+    resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
+    dev: false
 
   /tsutils/3.21.0_typescript@4.6.4:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}

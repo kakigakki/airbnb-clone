@@ -1,44 +1,67 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
+import { db } from "@/api/db";
+import { liveQuery } from "dexie";
+import { useObservable } from "@vueuse/rxjs";
+import { Friend } from "@/api/db";
+import { Ref } from "vue";
 
-const name = $ref('')
-const {t} = useI18n()
 
-const router = useRouter()
-const go = () => {
-  if (name) router.push(`/hi/${encodeURIComponent(name)}`)
+//add
+const addFriend = async () => {
+  try {
+    // Add the new friend!
+    const id = await db.friends.add({ name: "aaa", age: 11 })
+    console.log(id)
+
+
+  } catch (error) {
+    console.log(error)
+  }
 }
+
+//query
+const friends = useObservable(
+  liveQuery(() => db.friends.toArray()) as any
+) as Ref<Friend[]>
+
+//
+const updateFriend = async () => {
+  try {
+    // Add the new friend!
+    const id = await db.friends.put({ id: 2, name: "sdsd", age: 111 })
+    console.log(id)
+
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const deleteFriend = async () => {
+  try {
+    // Add the new friend!
+    const id = await db.friends.delete(3)
+    console.log(id)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 </script>
 
 <template>
-  <div>
-    <div i-carbon-campsite text-4xl inline-block />
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse-lite" target="_blank"> Vitesse Lite {{t("button.about")}} </a>
-    </p>
-    <p>
-      <em text-sm op75>Opinionated Vite Starter Template</em>
-    </p>
-
-    <div py-4 />
-
-    <input
-      id="input"
-      v-model="name"
-      placeholder="What's your name?"
-      type="text"
-      autocomplete="false"
-      p="x-4 y-2"
-      w="250px"
-      text="center"
-      bg="transparent"
-      border="~ rounded gray-200 dark:gray-700"
-      outline="none active:none"
-      @keydown.enter="go"
-    />
-
-    <div>
-      <button class="m-3 text-sm btn" :disabled="!name" @click="go">Go</button>
-    </div>
-  </div>
+  <button rounded @click="addFriend" border=" dark-600" border-1 p="4" m="4" text="lg" bg="red"> addFriend</button>
+  <button rounded @click="updateFriend" border=" dark-600" border-1 p="4" m="4" text="lg" bg="red">
+    updateFriend</button>
+  <button rounded @click="deleteFriend" border=" dark-600" border-1 p="4" m="4" text="lg" bg="red">
+    deleteFriend</button>
+  <span v-for="item in friends">
+    <table>
+      <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.age }}</td>
+        <td>{{ item.name }}</td>
+      </tr>
+    </table>
+  </span>
 </template>
