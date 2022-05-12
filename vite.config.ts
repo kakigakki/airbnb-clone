@@ -43,7 +43,7 @@ export default defineConfig({
     // https://github.com/antfu/vite-plugin-components
     Components({
       dts: true,
-      dirs: ['src/components/'],
+      dirs: ['src/components/', 'src/layouts'],
       resolvers: [ElementPlusResolver(), IconsResolver(), VueUseComponentsResolver()],
     }),
 
