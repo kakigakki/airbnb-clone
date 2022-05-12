@@ -1,8 +1,8 @@
 <template>
-  <div sticky top-0 ref="header" relative>
+  <div sticky top-0 ref="header" h-20 relative bg-white>
     <!-- header  -->
-    <div p="x-20 y-4" flex justify-between>
-      <div flex items-center w="1/3">
+    <div p="x-20 y-4" flex justify-between items-start>
+      <div flex items-center w="1/3" cursor-pointer>
         <div i-carbon-haze inline-block text-4xl m="r-2" color="[#ff385c]" />
         <span text-2xl font-bold color="[#ff385c]" select-none> airbnb-c</span>
       </div>
@@ -29,8 +29,8 @@
     <!-- search -->
     <div w="[50.2rem]" m-auto>
       <transition name="slide-to-sm">
-        <div v-if="showSearchBar" w="[50.2rem]" m-auto rounded-full border-1 border-gray-300 bg-gray-300 bg-opacity-20
-          flex ref="searchBar">
+        <div v-if="showSearchBar" relative w="[50.2rem]" m-auto rounded-full border-1 border-gray-300 bg-gray-300
+          bg-opacity-20 flex ref="searchBar">
           <div>
             <!-- ロケーション -->
             <button :class="{ 'transparant-btn': searchIdx !== 0, 'actived-transparant-btn': searchIdx === 0, }" py-3
@@ -81,23 +81,33 @@
               </div>
             </button>
           </div>
+          <!-- search Icon -->
+          <div absolute right-3 h-11 class="transform -translate-y-1/2 top-1/2">
+            <div bg="[#ff385c]" h-full flex justify-center items-center rounded-full>
+              <div i-carbon-search color-white w-11></div>
+              <span :class="{ 'w-0 opacity-0': searchIdx === -1, 'w-15 -ml-3 mr-2': searchIdx !== -1 }" color-white
+                text-lg transition-all select-none cursor-pointer>Search</span>
+            </div>
+          </div>
         </div>
       </transition>
       <transition name="slide-to-lg">
         <div mt-4 class="absolute top-0 left-1/2 -translate-x-1/2 " v-if="!showSearchBar"
           @click="toggleShowSearchBar()">
-          <button rounded-full w-70 h-11 text-left pl-5 border-gray-300 border-1>Start Your
-            Trip</button>
+          <div relative>
+            <!-- mini search bar  -->
+            <button rounded-full w-70 h-11 text-left pl-5 border-gray-300 border-1>Start Your
+              Trip</button>
+            <!-- search Icon -->
+            <div absolute right-3 h-7 class="transform -translate-y-1/2 top-1/2">
+              <div bg="[#ff385c]" h-full flex justify-center items-center rounded-full>
+                <div i-carbon-search color-white w-7></div>
+              </div>
+            </div>
+          </div>
         </div>
       </transition>
-      <div transition-all absolute
-        :class="{ 'top-1/2 -translate-y-1/2 left-1/2': showSearchBar, 'top-1/2 -translate-y-1/2 left-1/2': !showSearchBar }">
-        <div bg="[#ff385c]" h-11 flex justify-center items-center rounded-full>
-          <div i-carbon-search color-white w-11></div>
-          <span :class="{ 'w-0 opacity-0': searchIdx === -1, 'w-15 -ml-3 mr-2': searchIdx !== -1 }" color-white text-lg
-            transition-all select-none cursor-pointer>Search</span>
-        </div>
-      </div>
+
     </div>
 
   </div>
@@ -111,20 +121,22 @@ const searchIdx = ref<searchIdxType>(-1)
 const searchBar = ref(null)
 const header = ref(null)
 const [showSearchBar, toggleShowSearchBar] = useToggle(false)
+const { y } = useScroll(window)
+
+watchDebounced(y, () => {
+  showSearchBar.value = !(y.value)
+}, {
+  immediate: true
+})
+
 const searchHotel = (value: boolean) => {
   isSearchHotel.value = value
 }
 const changeSearchIdx = (index: searchIdxType) => {
   searchIdx.value = index
 }
-onClickOutside(searchBar, (event) => {
-  console.log(event)
-  searchIdx.value = -1
-})
-onClickOutside(header, (event) => {
-  console.log(event)
-  showSearchBar.value = false
-})
+onClickOutside(searchBar, () => searchIdx.value = -1)
+onClickOutside(header, () => showSearchBar.value = false)
         // interface Props {
         //
         // }
@@ -134,7 +146,6 @@ onClickOutside(header, (event) => {
 
 
 <style scoped lang="scss">
-/* 可以为进入和离开动画设置不同的持续时间和动画函数 */
 .slide-to-lg-enter-active,
 .slide-to-lg-leave-active,
 .slide-to-sm-enter-active,
@@ -146,7 +157,7 @@ onClickOutside(header, (event) => {
 
 .slide-to-lg-enter-from,
 .slide-to-lg-leave-to {
-  transform: translateY(100%) translateX(-50%) scale(2.5);
+  transform: translateY(100%) translateX(-50%) scale(2.8);
   opacity: 0;
 }
 
