@@ -8,8 +8,7 @@ const locale = zhCn;
 <template>
   <main font-sans text="center gray-700 dark:gray-200 ">
     <el-config-provider :locale="locale">
-      <router-view></router-view>
+      <Layout></Layout>
     </el-config-provider>
-    <Footer />
   </main>
 </template>

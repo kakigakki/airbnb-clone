@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <common-header></common-header>
-    <common-content></common-content>
-    <common-footer></common-footer>
+  <div min-h-screen>
+    <router-view></router-view>
   </div>
 </template>
 

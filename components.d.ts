@@ -5,14 +5,12 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    CommonContent: typeof import('./src/layouts/CommonContent.vue')['default']
+    CommonFooter: typeof import('./src/layouts/CommonFooter.vue')['default']
     CommonHeader: typeof import('./src/layouts/CommonHeader.vue')['default']
     Counter: typeof import('./src/components/Counter.vue')['default']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
-    ElDivider: typeof import('element-plus/es')['ElDivider']
     Footer: typeof import('./src/components/Footer.vue')['default']
-    IBiList: typeof import('~icons/bi/list')['default']
-    ICarbonUserAvatarFilled: typeof import('~icons/carbon/user-avatar-filled')['default']
-    IIconoirLanguage: typeof import('~icons/iconoir/language')['default']
     Layout: typeof import('./src/layouts/Layout.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <common-header></common-header>
-    <common-content></common-content>
-    <common-footer></common-footer>
-  </div>
+  footer
 </template>
 
 <script setup lang="ts">
